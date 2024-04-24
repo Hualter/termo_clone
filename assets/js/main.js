@@ -3,7 +3,7 @@ const words = [
     "termo", "jogar", "amigo", "sabor", "fruta", "cofre", "feliz",
     "troca", "veias", "lapis", "pasta", "porta", "calor", "barco",
     "campo", "vapor", "tempo", "chave", "vento", "arroz", "feira",
-    "caixa", "vocal", "abeto", "limão", "canto", "fatos", "folha",
+    "caixa", "vocal", "abeto", "limao", "canto", "fatos", "folha",
     "brisa", "terra", "nuvem", "ninho", "sobra", "pente", "carta",
     "linha", "poder", "norte", "custo", "leite", "janta", "reino",
     "cedro", "lucro", "cores", "busto", "astro", "puxar", "pedra",
@@ -33,7 +33,8 @@ const words = [
     "mosca", "novos", "justo", "torna", "claro", "curso", "manga",
     "selar", "ouvir", "deter", "morto", "rubro", "salsa", "pegar",
     "dever", "civil", "fuzil", "funil", "burro", "parto", "garfo",
-    "marco", "largo", "adubo", "lerdo", "certo", "bater", "beber"
+    "marco", "largo", "adubo", "lerdo", "certo", "bater", "beber",
+    "bolso"
 ];
 
 // Variáveis globais
