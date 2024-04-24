@@ -132,7 +132,9 @@ function submitGuess(event) {
 
         // Limpa a entrada
         document.getElementById('guess').value = '';
-        document.getElementById('guess').blur();
+        if (window.screen.width <= 700) {
+            document.getElementById('guess').blur();
+        }
     }
 }
 
