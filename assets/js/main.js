@@ -118,7 +118,6 @@ function submitGuess(event) {
     }
 }
 
-
 // Função para reiniciar o jogo
 function resetGame() {
     attempts = 0;
@@ -172,22 +171,22 @@ $(document).ready(function() {
     $('#help-button').on('click', showHelp);
 });
 
-// Função para alternar entre modo claro e escuro
 function toggleDarkMode() {
     const body = document.body;
     const toggleButton = document.getElementById('toggle-mode');
     const toggleIcon = document.getElementById('toggle-icon');
+    const modal = document.getElementById('alertModal');
     
-    // Alterna a classe 'dark-mode' no elemento 'body'
     body.classList.toggle('dark-mode');
+    modal.classList.toggle('dark-mode');
     
-    // Atualiza o ícone do botão com base no modo atual
     if (body.classList.contains('dark-mode')) {
-        toggleIcon.textContent = 'wb_sunny'; 
+        toggleIcon.textContent = 'wb_sunny';
     } else {
-        toggleIcon.textContent = 'brightness_2'; 
+        toggleIcon.textContent = 'brightness_2';
     }
 }
+
 
 document.getElementById('toggle-mode').addEventListener('click', toggleDarkMode);
 

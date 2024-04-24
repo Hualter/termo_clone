@@ -117,6 +117,9 @@ body {
     body{
         margin:0px;
     }
+    .attempt{
+        height: 60px;
+    }
 }
 
 #help-button{
@@ -182,7 +185,6 @@ body {
 }
 
 .modal-content {
-    background-color: white;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;

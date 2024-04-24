@@ -25,6 +25,17 @@
     color: #f0f0f0;
 }
 
+.dark-mode .modal-content{
+    background-color: #121212;
+}
+
+.dark-mode #alertModal .close{
+    color: #f0f0f0;
+}
+.dark-mode #alertModal .modal-content{
+    border: 1px solid #888;
+}
+
 #toggle-mode{
     padding: 5px;
 }
