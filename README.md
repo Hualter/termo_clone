@@ -13,6 +13,7 @@ Para desenvolver esse projeto utilizei o JavaScript, HTML e CSS  (Com Bootstrap)
 
 Por que fiz esse projeto?
 Termo é um jogo que gosto bastante e o jogava diariamente, foi ai que pensei, por que não tento criar a minha cópia/clone desse jogo?
+
 E foi isso que fiz, me desafiei a criar esse jogo para poder aprimorar meus conhecimentos em JavaScript.
 
 Segue o link dos jogos originais:
@@ -21,11 +22,14 @@ Wordle ([WordleOG](https://www.nytimes.com/games/wordle/index.html))
 
 ## Quais as regras do jogo?
 
-O objetivo do jogo é adivinhar a palavra correta. Você tem 6 tentativas para adivinhar uma palavra de 5 letras. Cada letra será marcada com uma cor diferente:
+O objetivo do jogo é adivinhar a palavra correta. Você tem 6 tentativas para adivinhar uma palavra de 5 letras. 
+
+Cada letra será marcada com uma cor diferente:
 
 - Verde: A letra está correta e na posição correta.
 - Amarelo: A letra está correta, mas na posição errada.
 - Vermelho: A letra está incorreta.
+
 Tente adivinhar a palavra certa com base nas pistas fornecidas.
 
 ## 📝 Melhorias
@@ -34,7 +38,8 @@ Quais melhorias foram feitas?
 
 - Neste projeto não houveram muitas diferenças do jogo original
 - Busquei manter o mais fiel possível
-- Porém acrescentei um pequeno botão para alterar o tema entre claro e escuro
+- Pequeno botão para alterar o tema entre claro e escuro
+- Responsividade do jogo para mobile
 
 
 ## 📷 Screenshots do app
