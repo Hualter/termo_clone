@@ -23,18 +23,18 @@ Wordle ([WordleOG](https://www.nytimes.com/games/wordle/index.html))
 
 O objetivo do jogo é adivinhar a palavra correta. Você tem 6 tentativas para adivinhar uma palavra de 5 letras. Cada letra será marcada com uma cor diferente:
 
-Verde: A letra está correta e na posição correta.
-Amarelo: A letra está correta, mas na posição errada.
-Vermelho: A letra está incorreta.
+- Verde: A letra está correta e na posição correta.
+- Amarelo: A letra está correta, mas na posição errada.
+- Vermelho: A letra está incorreta.
 Tente adivinhar a palavra certa com base nas pistas fornecidas.
 
 ## 📝 Melhorias
 
 Quais melhorias foram feitas?
 
-Neste projeto não houveram muitas diferenças do jogo original
-Busquei manter o mais fiel possível
-Porém acrescentei um pequeno botão para alterar o tema entre claro e escuro
+- Neste projeto não houveram muitas diferenças do jogo original
+- Busquei manter o mais fiel possível
+- Porém acrescentei um pequeno botão para alterar o tema entre claro e escuro
 
 
 ## 📷 Screenshots do app
