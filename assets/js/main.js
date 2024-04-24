@@ -16,7 +16,7 @@ const words = [
     "terra", "sonho", "prova", "festa", "molho", "grama", "terno",
     "chuva", "malha", "vinho", "natal", "subir", "prato", "fundo",
     "panel", "fundo", "verde", "gelar", "pouco", "hotel", "sorte",
-    "velha", "baile", "norte", "nuvem", "bravo", "lutar", "lento",
+    "velha", "baile", "norte", "nuvem", "bravo", "chama", "lento",
     "pular", "bruma", "vidro", "bruxa", "casar", "letra", "tempo",
     "quase", "fundo", "justo", "furor", "nobre", "mania", "canal",
     "manso", "sonar", "rosto", "choro", "brisa", "aroma", "cinza",
@@ -28,13 +28,15 @@ const words = [
     "aceno", "brasa", "caixa", "azedo", "tumba", "ajuda", "arroz",
     "palco", "jejum", "barco", "banda", "astro", "grave", "lugar",
     "beijo", "faixa", "leito", "horto", "clima", "finas", "gesto",
-    "selar", "catar", "pesar", "folha", "ouvir", "folga", "armar",
+    "selar", "catar", "pesar", "folha", "balsa", "folga", "armar",
     "virar", "tarde", "noiva", "aceno", "pista", "terra", "circo",
     "mosca", "novos", "justo", "torna", "claro", "curso", "manga",
     "selar", "ouvir", "deter", "morto", "rubro", "salsa", "pegar",
     "dever", "civil", "fuzil", "funil", "burro", "parto", "garfo",
     "marco", "largo", "adubo", "lerdo", "certo", "bater", "beber",
-    "bolso"
+    "bolso", "perto", "berço", "pausa", "sopro", "fardo", "olhar",
+    "pesca", "pisar", "bonus", "polir", "nevar", "falar", "trigo",
+    "motor", "praia", "cheio", "levar", "cravo", "comum", "prego"
 ];
 
 // Variáveis globais
@@ -55,65 +57,80 @@ function submitGuess(event) {
         const guess = document.getElementById('guess').value.toLowerCase();
         console.log('Tentativa:', guess);
 
-        // Verifica o comprimento do palpite
+        // Verifica se o comprimento do palpite é de 5 letras
         if (guess.length !== 5) {
             showModal('A palavra deve ter 5 letras.');
             document.getElementById('guess').value = ''; 
             document.getElementById('guess').blur();
             return;
         }
+        // Obter a tentativa atual e a palavra correta
+        const currentAttemptDiv = document.querySelectorAll('.attempt')[currentAttempt];
+        const guessLetters = guess.split('');
+        const wordToGuessLetters = wordToGuess.split('');
+        // Usar contadores de letras para acompanhar as letras já processadas
+        const correctLetters = {};
+        const presentLetters = {};
+        const usedLetters = {};
 
-        console.log('Verificando palavra na lista de palavras válidas');
-        if (!words.includes(guess)) {
-            showModal('A palavra digitada não está na lista de palavras válidas. Tente novamente.');
-            document.getElementById('guess').value = '';
-            document.getElementById('guess').blur();
-            return;
+        // Passagem 1: Verificar letras corretas
+        for (let i = 0; i < guess.length; i++) {
+            const charElement = currentAttemptDiv.children[i];
+            const guessLetter = guessLetters[i];
+            const wordLetter = wordToGuessLetters[i];
+
+            // Verifica se a letra está na posição correta
+            if (guessLetter === wordLetter) {
+                charElement.classList.add('correct');
+                charElement.classList.remove('present', 'incorrect');
+                correctLetters[i] = true;
+                usedLetters[wordLetter] = (usedLetters[wordLetter] || 0) + 1;
+
+                // Adiciona a letra ao elemento
+                charElement.textContent = guessLetter;
+            } else {
+                charElement.classList.remove('correct');
+            }
         }
 
-        console.log('Preenchendo letras no tabuleiro');
-        const currentAttemptDiv = document.querySelectorAll('.attempt')[currentAttempt];
-        if (currentAttemptDiv) {
-            for (let i = 0; i < guess.length; i++) {
-                const charElement = currentAttemptDiv ? currentAttemptDiv.children[i] : null;
-                if (charElement) {
-                    charElement.classList.remove('correct', 'present', 'incorrect');
-                    charElement.textContent = guess[i];
-                    if (guess[i] === wordToGuess[i]) {
-                        charElement.classList.add('correct');
-                    } else if (wordToGuess.includes(guess[i])) {
-                        charElement.classList.add('present');
-                    } else {
-                        charElement.classList.add('incorrect');
-                    }
+        // Passagem 2: Verificar letras presentes
+        for (let i = 0; i < guess.length; i++) {
+            if (!correctLetters[i]) {
+                const charElement = currentAttemptDiv.children[i];
+                const guessLetter = guessLetters[i];
+
+                // Verifica se a letra está na palavra, mas em outra posição
+                if (wordToGuess.includes(guessLetter) && !usedLetters[guessLetter]) {
+                    charElement.classList.add('present');
+                    charElement.classList.remove('incorrect');
+                    presentLetters[i] = true;
+                    usedLetters[guessLetter] = (usedLetters[guessLetter] || 0) + 1;
+
+                    // Adiciona a letra ao elemento
+                    charElement.textContent = guessLetter;
                 } else {
-                    console.error(`Elemento para a letra ${i} não encontrado na linha ${currentAttempt}`);
+                    charElement.classList.add('incorrect');
+                    charElement.classList.remove('present');
+                    // Adiciona a letra ao elemento
+                    charElement.textContent = guessLetter;
                 }
             }
-        } else {
-            console.error(`Tentativa atual ${currentAttempt} não encontrada`);
         }
-
-        console.log('Atualizando tentativas');
+        // Atualizar tentativas
         attempts++;
         currentAttempt++;
-
-        console.log('Verificando se a palavra foi adivinhada');
+        // Verificar se a palavra foi adivinhada ou se as tentativas acabaram
         if (guess === wordToGuess) {
             showModal('Parabéns! Você acertou a palavra!');
             document.getElementById('guess').disabled = true;
             document.getElementById('reset-button').style.display = 'block';
         } else if (attempts >= maxAttempts) {
-            if (guess === wordToGuess) {
-                showModal('Parabéns! Você acertou a palavra!');
-            } else {
-                showModal(`Você atingiu o número máximo de tentativas! A palavra era ${wordToGuess.toUpperCase()}.`);
-            }
+            showModal(`Você atingiu o número máximo de tentativas! A palavra era ${wordToGuess.toUpperCase()}.`);
             document.getElementById('guess').disabled = true;
             document.getElementById('reset-button').style.display = 'block';
         }
 
-        console.log('Limpando entrada');
+        // Limpa a entrada
         document.getElementById('guess').value = '';
         document.getElementById('guess').blur();
     }
@@ -150,7 +167,6 @@ function resetGame() {
     if (modalMessageElement) {
         modalMessageElement.textContent = ''; // Apenas se modalMessageElement não for null
     }
-
     selectRandomWord();
 }
 
@@ -158,7 +174,6 @@ function resetGame() {
 document.addEventListener('DOMContentLoaded', function() {
     resetGame();
 });
-
 
 // Função para exibir o modal de ajuda
 function showHelp() {
@@ -172,6 +187,7 @@ $(document).ready(function() {
     $('#help-button').on('click', showHelp);
 });
 
+//Função para alterar o dark-mode
 function toggleDarkMode() {
     const body = document.body;
     const toggleButton = document.getElementById('toggle-mode');
@@ -187,7 +203,6 @@ function toggleDarkMode() {
         toggleIcon.textContent = 'brightness_2';
     }
 }
-
 
 document.getElementById('toggle-mode').addEventListener('click', toggleDarkMode);
 
@@ -217,7 +232,6 @@ window.addEventListener('click', function(event) {
     }
 });
 
-//window addEventListener com escape
 window.onkeydown = function(event) {
     event = event || window.event;
     
